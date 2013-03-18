@@ -26,7 +26,7 @@ then
 fi
 
 # Get url to asx video stream out of the no flash version of the zdf mediathek
-url_stream=$(curl -s "${url_noflash}" | grep asx | head -n1 | grep -o 'http://[^"]*')
+url_stream=$(curl -s "${url_noflash}" | grep asx | grep veryhigh | head -n1 | grep -o 'http://[^"]*')
 
 # If filename is empty, get name out of url
 filename="$2"
