@@ -13,9 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Get url to asx video stream out of the no flash version of the zdf mediathek
 url_noflash="$1"
-url_stream=$(curl -s ${url_noflash} | grep asx | grep -o 'http://[^"]*')
 
 # Check if No Flash Mediathek is used
 if [[ "${url_noflash}" != *flash=off* ]]
@@ -26,6 +24,9 @@ then
 	echo "http://www.zdf.de/ZDFmediathek/hauptnavigation/startseite?flash=off"
 	exit
 fi
+
+# Get url to asx video stream out of the no flash version of the zdf mediathek
+url_stream=$(curl -s ${url_noflash} | grep asx | grep -o 'http://[^"]*')
 
 # If filename is empty, get name out of url
 filename=$2
