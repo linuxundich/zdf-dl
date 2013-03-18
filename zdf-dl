@@ -26,15 +26,15 @@ then
 fi
 
 # Get url to asx video stream out of the no flash version of the zdf mediathek
-url_stream=$(curl -s ${url_noflash} | grep asx | grep -o 'http://[^"]*')
+url_stream=$(curl -s "${url_noflash}" | grep asx | head -n1 | grep -o 'http://[^"]*')
 
 # If filename is empty, get name out of url
-filename=$2
-if [ -z ${filename} ]; then
-	filename=$(echo ${url_noflash} | cut -d/ -f8- | cut -d? -f1)".wmv"
+filename="$2"
+if [ -z "${filename}" ]; then
+	filename=$(echo "${url_noflash}" | cut -d/ -f8- | cut -d? -f1)".wmv"
 fi 
 
 # Get stream and save it to disk
 echo "Lade ${filename} herunter, bitte haben Sie etwas Geduld..."
-mplayer -really-quiet -nolirc -playlist ${url_stream} -dumpstream -dumpfile ${filename}
+mplayer -really-quiet -nolirc -playlist "${url_stream}" -dumpstream -dumpfile "${filename}"
 
